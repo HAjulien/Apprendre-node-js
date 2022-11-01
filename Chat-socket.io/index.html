@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>chat avec socket.io</title>
+    <link rel="stylesheet" href="css/styles.css">
+
+</head>
+<body>
+
+    <aside>
+        <ul id="tabs">
+            <li class="active" data-room="general"># Géneral</li>
+            <li data-room="entraide"># entraide</li>
+            <li data-room="diverses"># diverses</li>
+        </ul>
+    </aside>
+
+    <main>
+        <div id="content">
+            <div id="messages"></div>
+            <div id="writting"></div>
+        </div>
+        <form>
+            <input type="text" id="name" placeholder="entrer votre nom">
+            <input type="text" id="message" placeholder=" votre message">
+            <button>Envoyer</button>
+        </form>
+    </main>
+
+    <!-- on va chercher socket.io.js -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="js/scripts.js"></script>
+
+</body>
+</html>

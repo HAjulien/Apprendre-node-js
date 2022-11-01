@@ -1,0 +1,85 @@
+*, ::before, ::after{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    display: flex;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #2f3136;
+}
+aside{
+    flex: 1;
+}
+main{
+    flex:4
+}
+
+#tabs{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+#tabs li{
+    padding: 10px;
+    color: white;
+    text-transform: lowercase;
+}
+#tabs li.active{
+    background-color: #393c43;
+    font-weight: bold;
+}
+#tabs li:not(.active){
+    cursor: pointer;
+}
+#content{
+    position: relative;
+    height: 90vh;
+}
+#writting{
+    position: absolute;
+    bottom: 0;
+    color: white;
+    background-color: #363c43;
+
+}
+#messages{
+    height: 100%;
+    background-color: #363c43;
+    overflow-y: scroll;
+}
+#messages div {
+    margin: 0;
+    padding: 10px;
+    color: white;
+}
+
+#messages div p {
+    padding: 5px 0;
+;
+}
+form {
+    display: flex;
+}
+#name, #message{
+    padding: 10px;
+    background-color: #40444b;
+    color: white;
+    border: none;
+}
+#name{
+    flex:1;
+}
+#message{
+    flex:5;
+}
+
+button{
+    flex:1;
+    padding: 10px;
+    border: none;
+    background-color: violet;
+    color: white;
+    cursor: pointer;
+}
