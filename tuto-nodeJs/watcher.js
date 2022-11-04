@@ -40,7 +40,6 @@ function spawnNode(){
 
     return pr
 }
-
 let childNodeProcess = spawnNode()
 const watcher = watch('./', {recurcive: true})
 for await(const event of watcher){
