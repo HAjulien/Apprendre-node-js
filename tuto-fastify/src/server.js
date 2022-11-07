@@ -7,6 +7,7 @@ import ejs from 'ejs'
 import { dirname, join } from "node:path"
 import { createPost, listPosts, showPost } from "./actions/posts.js"
 import { RecordNotFoundError } from "./errors/RecordNotFoundError.js"
+import { loginAction, logoutAction } from "./actions/auth.js"
 
 const app = fastify()
 const rootDir = dirname(dirname(fileURLToPath(import.meta.url)))
@@ -25,6 +26,9 @@ app.register(fastifyStatic, {
 })
 
 app.get('/', listPosts)
+app.get('/login', loginAction)
+app.post('/login', loginAction)
+app.post('/logout', logoutAction)
 app.post('/', createPost)
 app.get('/article/:id', showPost)
 app.setErrorHandler((error, req, res) => {

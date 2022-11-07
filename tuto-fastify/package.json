@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "type" : "module",
+  "type": "module",
   "scripts": {
     "dev": "node --watch src/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "fastify": "^4.9.2"
+    "fastify": "^4.9.2",
+    "phc-argon2": "^1.1.3"
   }
 }
