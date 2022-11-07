@@ -3,10 +3,11 @@ import {hash, verify} from "phc-argon2"
 
 export const loginAction = async (req, res) =>{
     const params = {}
-    const {password, username} = req.body
-    params.username = username
 
     if(req.method === "POST"){
+        const {password, username} = req.body
+        params.username = username
+
         const user = db.prepare('SELECT * FROM users WHERE username = ?')
                         .get(username)
         
