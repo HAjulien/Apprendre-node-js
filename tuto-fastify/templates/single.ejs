@@ -1,0 +1,16 @@
+<%- include('./shared/header.ejs', { title : post.title}) %> 
+
+
+<% if (locals.title) { %> 
+    <h1> <%= title %>  </h1>
+<% } %> 
+
+<div class="container">
+    <h1 class="my-4"><%= post.title %> </h1>
+    <p>
+        <%= post.content %> 
+    </p>
+</div>
+
+
+<%- include('./shared/footer.ejs') %> 
