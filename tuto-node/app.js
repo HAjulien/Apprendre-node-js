@@ -1,4 +1,4 @@
-/* import { createReadStream } from 'fs'
+import { createReadStream } from 'fs'
 import {createServer} from 'http'
 import { NotFoundError } from './functions/api/error.js'
 import { create, index, remove, update } from './functions/api/todos.js'
@@ -42,8 +42,8 @@ createServer(async (req, res) =>{
     }
     res.end()
 }).listen(3000)
-*/
 
+/*
 import Fastify from "fastify";
 import { findTodos, removeTodo } from "./functions/todos_storage.js"
 
@@ -63,3 +63,4 @@ fastify.delete('/todos', async (request, reply) => {
 fastify.listen({ port: 3000 }, (err, address) => {
     if (err) throw err
 })
+*/
