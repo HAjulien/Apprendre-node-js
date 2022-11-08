@@ -1,11 +1,13 @@
 <%- include('./shared/header.ejs', { title : "Bienvenue sur mon blog"}) %> 
 
 
-<% if (locals.title) { %> 
+<% if ( locals.title) { %> 
     <h1> <%= title %>  </h1>
 <% } %> 
 
 <div class="container">
+
+    <% if ( true || locals.user) { %> 
 
     <form action="" method="post">
 
@@ -22,6 +24,8 @@
         <button class="btn btn-primary">Ajouter l'article</button>
 
     </form>
+
+    <% } %> 
 
     <h1 class="my-4">Bienvenue sur mon blog</h1>
     <div class="row row-cols-2">

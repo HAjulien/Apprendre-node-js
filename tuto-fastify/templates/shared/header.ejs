@@ -8,3 +8,9 @@
     <link rel="stylesheet" href="/style.css">
 </head>
 <body>
+
+    <%  if (locals.user) { %>
+        <form action="/logout" method="post">
+            <button class="btn btn-danger">Se déconnecter</button>
+        </form>
+    <% } %> 

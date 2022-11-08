@@ -1,7 +1,9 @@
 import { db } from "../database.js"
 import { RecordNotFoundError } from "../errors/RecordNotFoundError.js"
+import { verifyUser } from "../functions/auth.js"
 
 export const listPosts = (req, res) => {
+
     const posts = db.prepare('SELECT * FROM posts ORDER BY created_at DESC').all()
     // console.log(posts)
     /* const posts = [
@@ -17,7 +19,8 @@ export const listPosts = (req, res) => {
     */
     res.view('templates/index.ejs', {
         //title : "Mon <br> titre",
-        posts
+        posts,
+        user : req.session.get('user')
     })
 }
 
@@ -32,6 +35,7 @@ export const showPost = ( req, res) => {
 }
 
 export const createPost = (req, res) => {
+    verifyUser(req)
     db.prepare('INSERT INTO posts (title, content, created_at) VALUES (?, ?, ?)')
         .run(
             req.body.title,

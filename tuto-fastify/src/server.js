@@ -1,5 +1,6 @@
 import fastify from "fastify"
 import fastifyFormBody from "@fastify/formbody"
+import fastifySecureSession from "@fastify/secure-session"
 import fastifyView from "@fastify/view"
 import fastifyStatic from "@fastify/static"
 import {fileURLToPath} from "url"
@@ -8,6 +9,8 @@ import { dirname, join } from "node:path"
 import { createPost, listPosts, showPost } from "./actions/posts.js"
 import { RecordNotFoundError } from "./errors/RecordNotFoundError.js"
 import { loginAction, logoutAction } from "./actions/auth.js"
+import { readFileSync } from "fs"
+import { notAuthenticatedError } from "./errors/notAuthenticatedError.js"
 
 const app = fastify()
 const rootDir = dirname(dirname(fileURLToPath(import.meta.url)))
@@ -16,6 +19,14 @@ const rootDir = dirname(dirname(fileURLToPath(import.meta.url)))
 app.register(fastifyView, {
     engine: {
         ejs
+    }
+})
+
+app.register(fastifySecureSession, {
+    cookieName: 'session',
+    key: readFileSync(join(rootDir, 'secret-key')),
+    cookie: {
+        path: '/'
     }
 })
 
@@ -37,6 +48,8 @@ app.setErrorHandler((error, req, res) => {
         return res.view('templates/404.ejs', {
             error : "cet enregistrement n'existe pas"
         })
+    } else if ( error instanceof notAuthenticatedError){
+        return res.redirect('/login')
     }
     console.error(error);
     res.statusCode = 500

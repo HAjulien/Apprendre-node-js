@@ -12,6 +12,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@fastify/cookie": "^8.3.0",
+    "@fastify/secure-session": "^5.2.0",
     "fastify": "^4.9.2",
     "phc-argon2": "^1.1.3"
   }
