@@ -1,0 +1,20 @@
+{
+  "name": "tuto-express",
+  "version": "1.0.0",
+  "description": "cours sur API REST avec express sequelize",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "serve-favicon": "^2.5.0"
+  },
+  "devDependencies": {
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.20"
+  }
+}
