@@ -38,4 +38,10 @@ createPokemon(app)
 updatePokemon(app)
 deletePokemon(app)
 
+//gestion erreur 
+app.use( ({res}) => {
+    const message = "Impossible de trouvé la ressource demandée ! Vous pouvez demander une autre URL"
+    res.status(404).json({message})
+})
+
 app.listen(port, () => console.log(`Notre application Node est démarrée sur : http://localhost:${port}`))
