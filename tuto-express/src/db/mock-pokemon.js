@@ -1,4 +1,4 @@
-export const pokemonsModele = [
+export const pokemonsArray = [
     {
         id: 1,
         name: "Bulbizarre",
