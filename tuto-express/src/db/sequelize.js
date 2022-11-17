@@ -11,7 +11,7 @@ export const sequelize = new Sequelize('pokedex','root','root', {
     logging : false
 })
 
-const Pokemon = PokemonModel(sequelize, DataTypes) 
+export const Pokemon = PokemonModel(sequelize, DataTypes) 
 
 let pokemons = pokemonsArray
 
@@ -23,7 +23,7 @@ export const initDb = () => {
                 hp: pokemon.hp,
                 cp: pokemon.cp,
                 picture: pokemon.picture,
-                types: pokemon.types.join(),
+                types: pokemon.types
             }).then((pokemon) => console.log(pokemon.toJSON()));
         });
         console.log("La base de donnée a bien été initialisée !");
