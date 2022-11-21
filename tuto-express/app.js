@@ -11,6 +11,7 @@ import { createPokemon } from "./src/routes/createPokemon.js"
 import { updatePokemon } from "./src/routes/updatePokemon.js"
 import { deletePokemon } from "./src/routes/deletePokemon.js"
 import { login } from "./src/routes/login.js"
+import { createUser } from "./src/routes/createUser.js"
 
 
 const app = express()
@@ -33,6 +34,7 @@ sequelize
 initDb()
 
 //routes API
+createUser(app)
 login(app)
 findAll(app)
 findPokemonByPk(app)
