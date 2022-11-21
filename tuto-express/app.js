@@ -10,6 +10,7 @@ import { findPokemonByPk } from "./src/routes/findPokemonByPk.js"
 import { createPokemon } from "./src/routes/createPokemon.js"
 import { updatePokemon } from "./src/routes/updatePokemon.js"
 import { deletePokemon } from "./src/routes/deletePokemon.js"
+import { login } from "./src/routes/login.js"
 
 
 const app = express()
@@ -32,6 +33,7 @@ sequelize
 initDb()
 
 //routes API
+login(app)
 findAll(app)
 findPokemonByPk(app)
 createPokemon(app)

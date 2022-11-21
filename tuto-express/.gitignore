@@ -1,1 +1,2 @@
 /node_modules
+/src/auth/private_key.js

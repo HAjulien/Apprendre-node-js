@@ -1,7 +1,8 @@
 import { Pokemon } from "../db/sequelize.js";
+import { auth } from "../auth/auth.js";
 
 export const deletePokemon = (app) => {
-    app.delete("/api/pokemons/:id", (req, res) => {
+    app.delete("/api/pokemons/:id", auth, (req, res) => {
         Pokemon.findByPk(req.params.id).then((pokemon) => {
             if(pokemon === null) {
                 const message = "Le pokemon n'existe pas. Réessayez avec un autre identifiant."
