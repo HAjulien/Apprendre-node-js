@@ -16,23 +16,30 @@ export const sequelize = new Sequelize('pokedex','root','root', {
 export const Pokemon = PokemonModel(sequelize, DataTypes) 
 export const User = UserModel(sequelize, DataTypes) 
 
+Pokemon.belongsTo(User);
+User.hasMany(Pokemon);
+
+
 let pokemons = pokemonsArray
 
 export const initDb = () => {
     return sequelize.sync({ force: true }).then((_) => {
-        pokemons.map((pokemon) => {
-            Pokemon.create({
-                name: pokemon.name,
-                hp: pokemon.hp,
-                cp: pokemon.cp,
-                picture: pokemon.picture,
-                types: pokemon.types
-            }).then((pokemon) => console.log(pokemon.toJSON()))
-        })
-        
         bcrypt.hash("sasha", 10)
         .then(hash => User.create({ username: "sasha",password: hash}))
-        .then(user => console.log(user.toJSON()))
+        //.then(user => console.log(user.toJSON()))
+        .then( user =>{
+            //console.log(user)
+            pokemons.map((pokemon) => {
+                user.createPokemon({
+                    name: pokemon.name,
+                    hp: pokemon.hp,
+                    cp: pokemon.cp,
+                    picture: pokemon.picture,
+                    types: pokemon.types
+                })
+                .then((pokemon) => console.log(pokemon.toJSON()))
+            })
+        })
         
         console.log("La base de donnée a bien été initialisée !")
     })

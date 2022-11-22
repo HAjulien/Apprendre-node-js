@@ -9,7 +9,6 @@ export const createUser = (app) => {
     app.post("/api/createUser", (req, res) => {
         const username = req.body.username
         const password = req.body.password
-
         if(!username || !password){
             const message = "Le nom ou le mot de passe est obligatoire"
             return res.status(404).json({ message })
