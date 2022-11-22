@@ -1,20 +1,16 @@
 import { Pokemon } from "../db/sequelize.js";
 import { ValidationError, UniqueConstraintError } from "sequelize"
 import { auth } from "../auth/auth.js"
+import { modifyPokemon } from "../auth/modifyPokemon.js"
 
 
 export const updatePokemon = (app) => {
-    app.put("/api/pokemons/:id", auth, (req, res) => {
+    app.put("/api/pokemons/:id", auth, modifyPokemon, (req, res) => {
         const id = req.params.id;
-        const userId = req.userId
         Pokemon.update(req.body, {
             where: { id: id }})
         .then((_) => {
             return Pokemon.findByPk(id).then((pokemon) => {
-                if(pokemon.UserId !== userId) {
-                    const message = "Vous n'avez pas les droits de modifier le pokémon de quelqu'un autre."
-                    return res.status(404).json({message})
-                }
                 if(pokemon === null) {
                     const message = "Le pokemon n'existe pas. Réessayez avec un autre identifiant."
                     return res.status(404).json({message})
