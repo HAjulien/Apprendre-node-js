@@ -5,14 +5,14 @@ import { auth } from "../auth/auth.js"
 
 export const createPokemon = (app) => {
     app.post("/api/pokemons", auth, (req, res) => {
-        const {types, name, hp, cp, picture} = req.body
+        const formData = req.body
         const UserId = req.userId
         Pokemon.create(
-            { types, name, hp, cp, picture, UserId }
+            {...formData, UserId}
         )
         .then((pokemon) => {
-            const message = `Le pokémon ${name} a bien été crée.`
-            res.json({ message, data: pokemon })
+            const message = `Le pokémon ${pokemon.name} a bien été crée.`
+            res.json({ message, pokemon })
         })
         .catch(error => {
             if(error instanceof ValidationError){
