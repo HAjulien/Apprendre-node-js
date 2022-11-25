@@ -1,8 +1,7 @@
 import { User } from "../db/sequelize.js"
 import { UniqueConstraintError } from "sequelize"
 import bcrypt from "bcrypt"
-import jwt from "jsonwebtoken"
-import { privateKey } from "../auth/private_key.js"
+import { generateToken } from "../../helpers.js"
 
 
 export const createUser = (app) => {
@@ -18,13 +17,7 @@ export const createUser = (app) => {
         .then(password => User.create({ username ,password}))
         .then(user => {
             const message = `L'utilisateur a été enregistré`
-
-            const { sign } = jwt;
-            const token = sign(
-                { userId : user.id},
-                privateKey,
-                { expiresIn : '24h' }
-            )
+            const token = generateToken(user)
 
             return res.json({ message, data: user, token })}
         )

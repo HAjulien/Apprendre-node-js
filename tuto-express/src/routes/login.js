@@ -1,7 +1,6 @@
 import { User } from "../db/sequelize.js"
 import bcrypt from "bcrypt"
-import jwt from "jsonwebtoken"
-import { privateKey } from "../auth/private_key.js"
+import { generateToken } from "../../helpers.js"
 
 export const login = (app) => {
     app.post("/api/login", (req, res) => {
@@ -20,15 +19,9 @@ export const login = (app) => {
                     return res.status(401).json({ message })
                 }
 
-                //JWT
-                const { sign } = jwt;
-                const token = sign(
-                    { userId : user.id},
-                    privateKey,
-                    { expiresIn : '24h' }
-                )
-                
+                const token = generateToken(user)
                 const message = `L'utilisateur a été connecté avec succès`
+                
                 return res.json({ message, data: user, token })
             })
         })

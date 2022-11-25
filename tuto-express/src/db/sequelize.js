@@ -3,8 +3,10 @@ import { PokemonModel } from "../models/pokemon.js"
 import { UserModel } from "../models/user.js"
 import { pokemonsArray } from "./mock-pokemon.js"
 import bcrypt from "bcrypt"
+import * as dotenv from 'dotenv'
+dotenv.config()
 
-export const sequelize = new Sequelize('pokedex','root','root', {
+export const sequelize = new Sequelize(process.env.NAME_BDD,process.env.NAME_SERVER,process.env.PASSWORD_SERVER, {
     host : 'localhost',
     dialect : 'mariadb',
     dialectOptions: {

@@ -13,10 +13,11 @@ import { deletePokemon } from "./src/routes/deletePokemon.js"
 import { login } from "./src/routes/login.js"
 import { createUser } from "./src/routes/createUser.js"
 
+import * as dotenv from 'dotenv'
+dotenv.config()
 
 const app = express()
 const rootDir = dirname(fileURLToPath(import.meta.url))
-const port = 3000
 
 /*middleware 
 app.use((req, res, next) => {
@@ -42,10 +43,10 @@ createPokemon(app)
 updatePokemon(app)
 deletePokemon(app)
 
-//gestion erreur 
+//gestion erreur 404
 app.use( ({res}) => {
     const message = "Impossible de trouvé la ressource demandée ! Vous pouvez demander une autre URL"
     res.status(404).json({message})
 })
 
-app.listen(port, () => console.log(`Notre application Node est démarrée sur : http://localhost:${port}`))
+app.listen(process.env.PORT, () => console.log(`Notre application Node est démarrée sur : http://localhost:${process.env.PORT} `))

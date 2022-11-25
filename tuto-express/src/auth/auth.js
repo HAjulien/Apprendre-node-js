@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken"
-import { privateKey } from "../auth/private_key.js"
-const { verify } = jwt;
+import * as dotenv from 'dotenv'
+dotenv.config()
 
 export const auth = (req, res, next) => {
     const authorizationHeader = req.headers.authorization;
@@ -11,7 +11,9 @@ export const auth = (req, res, next) => {
     }
 
     const token = authorizationHeader.split(" ")[1];
-    const decodedToken = verify( token, privateKey, (error, decodedToken) => {
+
+    const { verify } = jwt;
+    const decodedToken = verify( token, process.env.PRIVATE_KEY, (error, decodedToken) => {
         if (error) {
             const message = `L'utilisateur n'est pas autorisé à accèder à cette ressource.`
             return res.status(401).json({ message, data: error })
