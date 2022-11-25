@@ -1,4 +1,4 @@
-import { Pokemon } from "../db/sequelize.js"
+import { Pokemon, User } from "../db/sequelize.js"
 import { Op } from "sequelize"
 import { auth } from "../auth/auth.js"
 
@@ -30,7 +30,10 @@ export const findAll = (app) => {
             })
         }else{
 
-            Pokemon.findAll({ order : ['name']})
+            Pokemon.findAll({ order : ['name'],  include: {
+                model: User,
+                attributes : ["username", "id"]
+            }})
             .then((pokemons) => {
                 const message = "La liste des pokémons a bien été récupérée."
                 res.json({ message, data: pokemons})

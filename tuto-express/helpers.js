@@ -1,3 +1,4 @@
+/*
 export const success = (message, data) => {
     return { message, data }
 }
@@ -9,6 +10,7 @@ export const getUniqueId = (pokemons) => {
 
     return uniqueId
 }
+*/
 
 import jwt from "jsonwebtoken"
 import * as dotenv from 'dotenv'
