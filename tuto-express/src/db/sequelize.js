@@ -3,9 +3,9 @@ import { PokemonModel } from "../models/pokemon.js"
 import { UserModel } from "../models/user.js"
 import { pokemonsArray } from "./mock-pokemon.js"
 import { badgesArray } from "./mock-badge.js"
+import { badgeModel } from "../models/badge.js"
 import bcrypt from "bcrypt"
 import * as dotenv from 'dotenv'
-import { badgeModel } from "../models/badge.js"
 dotenv.config()
 
 export const sequelize = new Sequelize(process.env.NAME_BDD,process.env.NAME_SERVER,process.env.PASSWORD_SERVER, {
@@ -24,8 +24,8 @@ export const Badge = badgeModel(sequelize, DataTypes)
 Pokemon.belongsTo(User);
 User.hasMany(Pokemon);
 
-Badge.belongsToMany(User, { through: 'BadgesUser' });
-User.belongsToMany(Badge, { through: 'BadgesUser' });
+Badge.belongsToMany(User, { through: 'User_Badges' });
+User.belongsToMany(Badge, { through: 'User_Badges' });
 
 
 

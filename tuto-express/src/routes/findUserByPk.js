@@ -7,7 +7,8 @@ export const findUserByPk = (app) => {
             attributes : [ "id","username"],
             include: {
                 model: Badge,
-                attributes : ["name", "id"]
+                attributes : ["name", "id"],
+                through: { attributes: [] }  //hide badgesUser Table on response
             }
         }).then((user) => {
             if(user === null) {
