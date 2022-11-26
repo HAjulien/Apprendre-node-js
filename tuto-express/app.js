@@ -12,6 +12,7 @@ import { updatePokemon } from "./src/routes/updatePokemon.js"
 import { deletePokemon } from "./src/routes/deletePokemon.js"
 import { login } from "./src/routes/login.js"
 import { createUser } from "./src/routes/createUser.js"
+import { findUserByPk } from "./src/routes/findUserByPk.js"
 
 import * as dotenv from 'dotenv'
 dotenv.config()
@@ -37,6 +38,7 @@ initDb()
 //routes API
 createUser(app)
 login(app)
+findUserByPk(app)
 findAll(app)
 findPokemonByPk(app)
 createPokemon(app)
