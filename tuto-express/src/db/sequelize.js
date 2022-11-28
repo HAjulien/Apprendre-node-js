@@ -57,7 +57,7 @@ export const initDb = () => {
                 Badge.create({
                     name : badge.name
                 })
-                .then(badge => user.addBadge(badge, { through: { name_dresseur: user.username } }) )
+                //.then(badge => user.addBadge(badge, { through: { name_dresseur: user.username } }) )
             })
 
         })
