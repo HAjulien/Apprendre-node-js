@@ -23,3 +23,11 @@ export const generateToken = (user) => {
         { expiresIn : '1h' }
     )
 }
+
+export const generateRefreshToken = (user) => {
+    return jwt.sign(
+        {userId : user.id},
+        process.env.PRIVATE_REFRESH_KEY,
+        {expiresIn : "1y"}
+    )
+}

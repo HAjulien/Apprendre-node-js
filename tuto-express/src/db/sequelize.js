@@ -8,7 +8,7 @@ import bcrypt from "bcrypt"
 import * as dotenv from 'dotenv'
 dotenv.config()
 
-export const sequelize = new Sequelize(process.env.NAME_BDD,process.env.NAME_SERVER,process.env.PASSWORD_SERVER, {
+export const sequelize = new Sequelize(process.env.NAME_DATABASE,process.env.NAME_SERVER,process.env.PASSWORD_SERVER, {
     host : 'localhost',
     dialect : 'mariadb',
     dialectOptions: {
@@ -16,6 +16,10 @@ export const sequelize = new Sequelize(process.env.NAME_BDD,process.env.NAME_SER
     },
     logging : false
 })
+
+const User_Badges = sequelize.define('User_Badges', {
+    name_dresseur: DataTypes.STRING
+}, { timestamps: false });
 
 export const Pokemon = PokemonModel(sequelize, DataTypes) 
 export const User = UserModel(sequelize, DataTypes) 
@@ -26,8 +30,6 @@ User.hasMany(Pokemon);
 
 Badge.belongsToMany(User, { through: 'User_Badges' });
 User.belongsToMany(Badge, { through: 'User_Badges' });
-
-
 
 
 let pokemons = pokemonsArray
@@ -55,7 +57,7 @@ export const initDb = () => {
                 Badge.create({
                     name : badge.name
                 })
-                .then(badge => user.addBadge(badge) )
+                .then(badge => user.addBadge(badge, { through: { name_dresseur: user.username } }) )
             })
 
         })

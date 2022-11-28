@@ -13,6 +13,7 @@ import { deletePokemon } from "./src/routes/deletePokemon.js"
 import { login } from "./src/routes/login.js"
 import { createUser } from "./src/routes/createUser.js"
 import { findUserByPk } from "./src/routes/findUserByPk.js"
+import { addBadge } from "./src/routes/addBadgeToUser.js"
 
 import * as dotenv from 'dotenv'
 dotenv.config()
@@ -44,6 +45,7 @@ findPokemonByPk(app)
 createPokemon(app)
 updatePokemon(app)
 deletePokemon(app)
+addBadge(app)
 
 //gestion erreur 404
 app.use( ({res}) => {
