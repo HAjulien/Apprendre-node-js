@@ -11,6 +11,7 @@ import { createPokemon } from "./src/routes/createPokemon.js"
 import { updatePokemon } from "./src/routes/updatePokemon.js"
 import { deletePokemon } from "./src/routes/deletePokemon.js"
 import { login } from "./src/routes/login.js"
+import { refreshToken } from "./src/routes/refreshToken.js"
 import { createUser } from "./src/routes/createUser.js"
 import { findUserByPk } from "./src/routes/findUserByPk.js"
 import { addBadgesToUser } from "./src/routes/addBadgesToUser.js"
@@ -39,6 +40,7 @@ initDb()
 //routes API
 createUser(app)
 login(app)
+refreshToken(app)
 findUserByPk(app)
 findAll(app)
 findPokemonByPk(app)
