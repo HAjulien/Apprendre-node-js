@@ -18,15 +18,15 @@ export const refreshToken = (app) => {
             if (error){
                 return res.sendStatus(401)
             }
-
+            delete user.iat
+            delete user.exp
+            
             try {
                 const searchUser = await User.findByPk(user.userId)
                 if(searchUser === null ){
                     throw new Error("Le user n'existe plus.")
                 }
-                delete user.iat
-                delete user.exp
-                const refreshedToken = generateToken(user);
+                const refreshedToken = generateToken(searchUser);
                 res.send({
                     accessToken : refreshedToken
                 })

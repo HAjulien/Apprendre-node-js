@@ -18,7 +18,6 @@ export const login = (app) => {
                     const message = `Le mot de passe est incorrect`
                     return res.status(401).json({ message })
                 }
-
                 const token = generateToken(user)
                 const refreshtoken = generateRefreshToken(user)
                 const message = `L'utilisateur a été connecté avec succès`
