@@ -31,3 +31,9 @@ export const generateRefreshToken = (user) => {
         {expiresIn : "1y"}
     )
 }
+
+export const verifyPassword = (password) => {
+    const regex = new RegExp("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[.#?!@$ %^&*-]).{8,}$")
+    console.log(regex.test(password))
+    return regex.test(password)
+}
