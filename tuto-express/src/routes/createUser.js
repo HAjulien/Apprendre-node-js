@@ -2,7 +2,7 @@ import { User } from "../db/sequelize.js"
 import { UniqueConstraintError, ValidationError } from "sequelize"
 import bcrypt from "bcrypt"
 import { generateToken } from "../../helpers.js"
-import { verifyPassword } from "../../helpers.js"
+import { isPasswordValid } from "../../helpers.js"
 
 
 export const createUser = (app) => {
@@ -21,7 +21,7 @@ export const createUser = (app) => {
             return res.status(404).json({ message })
         }
 
-        if(!verifyPassword(password)){
+        if(!isPasswordValid(password)){
             const message = "le mot de passe doit contenir 8 caractères minimun dont 1 chiffre, 1 maj, 1min, 1 spécial"
             return res.status(404).json({ message })
         }

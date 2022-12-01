@@ -32,7 +32,7 @@ export const generateRefreshToken = (user) => {
     )
 }
 
-export const verifyPassword = (password) => {
+export const isPasswordValid = (password) => {
     const regex = new RegExp("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[.#?!@$ %^&*-]).{8,}$")
     //console.log(regex.test(password))
     return regex.test(password)
