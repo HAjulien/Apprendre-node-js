@@ -8,7 +8,7 @@ export const modifyPokemon = (req, res, next) => {
         //console.log(req.userId, req.params.id, pokemon.UserId );
         if(pokemon.UserId !== userId) {
             const message = "Vous n'avez pas les droits de modifier le pokémon de quelqu'un autre."
-            return res.status(400).json({message})
+            return res.status(401).json({message})
         }
         next()
     })
