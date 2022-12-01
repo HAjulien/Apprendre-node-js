@@ -10,10 +10,16 @@ export const addBadgesToUser = async (app) => {
             const user = await User.findByPk(id)
             const allBadgesId = Object.values(req.body)
 
-            for (const badgeId of allBadgesId) {
+            /*for (const badgeId of allBadgesId) {
                 const badgeAdd = await Badge.findByPk(badgeId)
                 await user.addBadge(badgeAdd, { through: { name_dresseur: user.username } })
-            }
+            }*/
+
+            const addingBadges = allBadgesId.map( async (badgeId) =>{
+                const badgeAdd = await Badge.findByPk(badgeId)
+                await user.addBadge(badgeAdd, { through: { name_dresseur: user.username } })
+            })
+            await Promise.all(addingBadges)
 
             const userUpdate = await User.findByPk(id , {
                 attributes : [ "id","username"],

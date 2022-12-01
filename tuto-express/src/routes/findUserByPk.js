@@ -16,11 +16,11 @@ export const findUserByPk = (app) => {
                 return res.status(404).json({message})
             }
             const message = "Un user a bien été trouvé."
-            res.json({ message, data: user })
+            res.json({ message, user })
         })
         .catch(error => {
             const message = "Le user n'a pas pu être récupérée. Réessayez dans quelques instants."
-            res.status(500).json({message, data: error})
+            res.status(500).json({message, error})
         })
     })
 }

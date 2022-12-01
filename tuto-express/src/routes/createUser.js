@@ -1,5 +1,5 @@
 import { User } from "../db/sequelize.js"
-import { UniqueConstraintError } from "sequelize"
+import { UniqueConstraintError, ValidationError } from "sequelize"
 import bcrypt from "bcrypt"
 import { generateToken } from "../../helpers.js"
 
@@ -26,14 +26,17 @@ export const createUser = (app) => {
             const message = `L'utilisateur a été enregistré`
             const token = generateToken(user)
 
-            return res.json({ message, data: user, token })}
+            return res.json({ message, user, token })}
         )
         .catch(error => {
             if(error instanceof UniqueConstraintError){
-                return res.status(400).json({ message : error.message, data: error})
+                return res.status(400).json({ message : error.message, error})
+            }
+            if(error instanceof ValidationError){
+                return res.status(400).json({ message : error.message, error})
             }
             const message = "L'utilisateur n'a pas pu être ajouté. Réessayez dans quelques instants."
-            res.status(500).json({message, data: error})
+            res.status(500).json({message, error})
         })
     })
 }

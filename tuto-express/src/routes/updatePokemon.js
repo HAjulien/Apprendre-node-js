@@ -3,7 +3,6 @@ import { ValidationError, UniqueConstraintError } from "sequelize"
 import { auth } from "../auth/auth.js"
 import { modifyPokemon } from "../auth/modifyPokemon.js"
 
-
 export const updatePokemon = (app) => {
     app.put("/api/pokemons/:id", auth, modifyPokemon, (req, res) => {
         const id = req.params.id;

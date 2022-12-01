@@ -14,7 +14,7 @@ export const findPokemonByPk = (app) => {
                 return res.status(404).json({message})
             }
             const message = "Un pokémon a bien été trouvé."
-            res.json({ message, data: pokemon })
+            res.json({ message, pokemon })
         })
         .catch(error => {
             const message = "Le pokemon n'a pas pu être récupérée. Réessayez dans quelques instants."

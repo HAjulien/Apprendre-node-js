@@ -26,7 +26,7 @@ export const findAll = (app) => {
             })
             .then(({ count : totalPokemons , rows : pokemons}) => {
                 const message = `Il y à ${totalPokemons} pokemons qui correspond au terme de recherche ${name}`
-                res.json({ message, data: pokemons })
+                res.json({ message, pokemons })
             })
         }else{
 
@@ -36,7 +36,7 @@ export const findAll = (app) => {
             }})
             .then((pokemons) => {
                 const message = "La liste des pokémons a bien été récupérée."
-                res.json({ message, data: pokemons})
+                res.json({ message, pokemons})
             })
             .catch(error => {
                 const message = "La liste des pokémons n'a pas pu être récupérée. Réessayez dans quelques instants."

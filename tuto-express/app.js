@@ -47,7 +47,7 @@ updatePokemon(app)
 deletePokemon(app)
 addBadgesToUser(app)
 
-//gestion erreur 404
+//gestion erreur 404 route non trouvé
 app.use( ({res}) => {
     const message = "Impossible de trouvé la ressource demandée ! Vous pouvez demander une autre URL"
     res.status(404).json({message})

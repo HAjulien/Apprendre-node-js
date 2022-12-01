@@ -12,8 +12,7 @@ export const auth = (req, res, next) => {
 
     const token = authorizationHeader.split(" ")[1];
 
-    const { verify } = jwt;
-    const decodedToken = verify( token, process.env.PRIVATE_KEY, (error, decodedToken) => {
+    jwt.verify( token, process.env.PRIVATE_KEY, (error, decodedToken) => {
         if (error) {
             const message = `L'utilisateur n'est pas autorisé à accèder à cette ressource.`
             return res.status(401).json({ message, data: error })
