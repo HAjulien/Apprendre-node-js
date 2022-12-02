@@ -1,8 +1,7 @@
 import { User } from "../db/sequelize.js"
 import { UniqueConstraintError, ValidationError } from "sequelize"
 import bcrypt from "bcrypt"
-import { generateToken } from "../../helpers.js"
-import { isPasswordValid } from "../../helpers.js"
+import { generateToken, generateRefreshToken, isPasswordValid } from "../../helpers.js"
 
 
 export const createUser = (app) => {
@@ -31,8 +30,10 @@ export const createUser = (app) => {
         .then(user => {
             const message = `L'utilisateur a été enregistré`
             const token = generateToken(user)
+            const refreshtoken = generateRefreshToken(user)
 
-            return res.json({ message, user, token })}
+
+            return res.json({ message, user, token, refreshtoken })}
         )
         .catch(error => {
             if(error instanceof UniqueConstraintError){
