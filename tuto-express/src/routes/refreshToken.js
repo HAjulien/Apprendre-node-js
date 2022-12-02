@@ -2,6 +2,8 @@ import jwt from "jsonwebtoken"
 import * as dotenv from 'dotenv'
 import { generateToken } from "../../helpers.js"
 import { User } from "../db/sequelize.js"
+import { RecordNotFoundError } from "../../errors/RecordNotFoundError.js"
+
 dotenv.config()
 
 
@@ -24,14 +26,19 @@ export const refreshToken = (app) => {
             try {
                 const searchUser = await User.findByPk(user.userId)
                 if(searchUser === null ){
-                    throw new Error("Le user n'existe plus.")
+                    throw new RecordNotFoundError("Le user n'existe plus.")
                 }
                 const refreshedToken = generateToken(searchUser);
                 res.send({
                     accessToken : refreshedToken
                 })
-            } catch (e) {
-                const message = "Le user n'existe plus."
+            } catch (error) {
+                console.error(error);
+                let message = "une erreur est survenue, veuillez réessayer plus tard."
+                
+                if(error instanceof RecordNotFoundError){
+                    message = error.message
+                }
                 return res.json({message})                
             }
         })

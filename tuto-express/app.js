@@ -15,6 +15,7 @@ import { refreshToken } from "./src/routes/refreshToken.js"
 import { createUser } from "./src/routes/createUser.js"
 import { findUserByPk } from "./src/routes/findUserByPk.js"
 import { addBadgesToUser } from "./src/routes/addBadgesToUser.js"
+import { removeBadgeFromUser } from "./src/routes/removeBagdeFromUser.js"
 
 import * as dotenv from 'dotenv'
 dotenv.config()
@@ -48,6 +49,7 @@ createPokemon(app)
 updatePokemon(app)
 deletePokemon(app)
 addBadgesToUser(app)
+removeBadgeFromUser(app)
 
 //gestion erreur 404 route non trouvé
 app.use( ({res}) => {
