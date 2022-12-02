@@ -1,9 +1,10 @@
 import { User } from "../db/sequelize.js"
 import bcrypt from "bcrypt"
 import { generateRefreshToken, generateToken } from "../../helpers.js"
+import { limiter } from "../auth/rateLimiter.js"
 
 export const login = (app) => {
-    app.post("/api/login", (req, res) => {
+    app.post("/api/login", limiter, (req, res) => {
         User.findOne({ where: { username: req.body.username } }).then((user) => {
 
             if(!user){
