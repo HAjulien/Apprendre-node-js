@@ -1,6 +1,6 @@
 import { Badge, User } from "../db/sequelize.js";
 import { auth } from "../auth/auth.js"
-import { RecordNotFoundError } from "../../errors/RecordNotFoundError.js"
+import { RecordNotFoundError } from "../errors/RecordNotFoundError.js"
 
 
 export const removeBadgeFromUser = async (app) => {

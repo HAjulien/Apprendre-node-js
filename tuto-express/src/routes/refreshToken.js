@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken"
 import * as dotenv from 'dotenv'
 import { generateToken } from "../../helpers.js"
 import { User } from "../db/sequelize.js"
-import { RecordNotFoundError } from "../../errors/RecordNotFoundError.js"
+import { RecordNotFoundError } from "../errors/RecordNotFoundError.js"
 
 dotenv.config()
 
