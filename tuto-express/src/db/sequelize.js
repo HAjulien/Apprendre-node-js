@@ -1,9 +1,9 @@
 import { Sequelize, DataTypes } from "sequelize"
 import { PokemonModel } from "../models/pokemon.js"
 import { UserModel } from "../models/user.js"
+import { badgeModel } from "../models/badge.js"
 import { pokemonsArray } from "./mock-pokemon.js"
 import { badgesArray } from "./mock-badge.js"
-import { badgeModel } from "../models/badge.js"
 import bcrypt from "bcrypt"
 import * as dotenv from 'dotenv'
 dotenv.config()
@@ -17,6 +17,7 @@ export const sequelize = new Sequelize(process.env.NAME_DATABASE,process.env.NAM
     logging : false
 })
 
+//table joint
 const User_Badges = sequelize.define('User_Badges', {
     name_dresseur: DataTypes.STRING
 }, { timestamps: false });
