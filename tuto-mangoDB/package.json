@@ -1,0 +1,21 @@
+{
+  "name": "tuto-mangodb",
+  "version": "1.0.0",
+  "description": "cours sur API REST avec mangodb et mongoose",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "test": ""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mongodb": "^4.12.1",
+    "mongoose": "^6.7.5",
+    "validator": "^13.7.0"
+  }
+}
