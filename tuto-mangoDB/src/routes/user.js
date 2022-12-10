@@ -1,5 +1,7 @@
 import express from "express"
 import { User } from '../models/user.js'
+import { upload } from '../services/multer.js'
+import { imagekit } from '../services/imagekit.js'
 
 export const router = new express.Router()
 
@@ -70,6 +72,29 @@ router.post('/users/login', async (req, res) => {
         const user = await User.findUser(req.body.email, req.body.password);
         res.send(user)
     } catch (error) {
+        res.status(400).send(error)
+    }
+})
+
+router.post('/image', upload.single('file'), async (req, res) => {
+    try {
+
+        if (!req.file || req.file === {}){
+            throw new Error("il n'y a pas de fichier" )
+        }
+
+        const image = await imagekit.upload({
+            file: req.file.buffer.toString('base64'),
+            fileName : req.file.originalname,
+            folder : "testMongo",
+            useUniqueFileName : false
+        })
+        const message = "image a été sauvegarde"
+        const url = image.url
+        return  res.status(200).send({message, url})
+
+    } catch (error) {
+        console.log(error)
         res.status(400).send(error)
     }
 })
