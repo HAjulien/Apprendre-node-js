@@ -12,12 +12,12 @@ export const upload = multer(
     storage,
     limits: {
         fileSize: maxSize * MB
+        
     },
     fileFilter(req, file, cb) {
         if (!file.originalname.match(RegexFormatAccept)) {
-            return cb(new Error('Please upload a valid image file'), false)
+            return cb(new Error('Seul les formats jpg, jpeg et png sont autorisé'), false)
         }
-        
         cb(undefined, true)
     }
 })

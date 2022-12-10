@@ -76,25 +76,39 @@ router.post('/users/login', async (req, res) => {
     }
 })
 
-router.post('/image', upload.single('file'), async (req, res) => {
-    try {
+router.post('/image', async (req, res) => {
+    const uploadSingleImage = upload.single('file')
 
-        if (!req.file || req.file === {}){
-            throw new Error("il n'y a pas de fichier" )
+    uploadSingleImage(req, res, async function (err) {
+
+        if (err) {
+            return res.status(400).send({ message: err.message })
         }
 
-        const image = await imagekit.upload({
-            file: req.file.buffer.toString('base64'),
-            fileName : req.file.originalname,
-            folder : "testMongo",
-            useUniqueFileName : false
-        })
-        const message = "image a été sauvegarde"
-        const url = image.url
-        return  res.status(200).send({message, url})
+        if (!req.file || req.file === {}){
+            return res.status(400).send({ message: "il n'y a pas de fichier" })
+        }
 
-    } catch (error) {
-        console.log(error)
-        res.status(400).send(error)
-    }
+        try {
+            const dateNow = Date.now()
+
+            const image = await imagekit.upload({
+                file: req.file.buffer.toString('base64'),
+                fileName : `${dateNow}-${req.file.originalname}`,
+                folder : "testMongo",
+                useUniqueFileName : true
+            })
+            
+            const message = "image a été sauvegarde"
+            return  res.status(200).send({message, image})
+        
+        } catch (error) {
+            console.log(error)
+            res.status(400).send(error)
+        }
+
+    })
+
+
 })
+
