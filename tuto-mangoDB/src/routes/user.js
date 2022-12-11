@@ -42,7 +42,7 @@ router.patch('/users/:id', async (req, res) => {
     const updatedInfo = Object.keys(req.body)
 
     try {
-        const user = await User   .findById(userId)
+        const user = await User.findById(userId)
 
         if(!user) return res.status(404).send('not found')
 
@@ -76,10 +76,24 @@ router.post('/users/login', async (req, res) => {
     }
 })
 
-router.post('/image', async (req, res) => {
-    const uploadSingleImage = upload.single('file')
+router.patch('/users/image/:id', async (req, res) => {
+    const userId = req.params.id
 
-    uploadSingleImage(req, res, async function (err) {
+    const uploadImageAndSaveToUser = upload.single('file')
+    const user = await User.findById(userId)
+
+    if(!user) return res.status(404).send('not found')
+
+    if(user.imageUrl) {
+        imagekit.deleteFile(user.imageId, function(error, result) {
+            const message = "une erreur est survenue, veuillez contacter le site."
+            if(error) res.send( {message} );
+        })
+        delete user.imageId
+        delete user.imageUrl
+    }
+
+    uploadImageAndSaveToUser(req, res, async function (err) {
 
         if (err) {
             return res.status(400).send({ message: err.message })
@@ -98,9 +112,10 @@ router.post('/image', async (req, res) => {
                 folder : "testMongo",
                 useUniqueFileName : true
             })
-            
-            const message = "image a été sauvegarde"
-            return  res.status(200).send({message, image})
+            user.imageUrl = image.url
+            user.imageId = image.fileId
+            await user.save()
+            res.send(user)
         
         } catch (error) {
             console.log(error)
