@@ -110,7 +110,8 @@ router.patch('/users/image/:id', async (req, res) => {
                 file: req.file.buffer.toString('base64'),
                 fileName : `${dateNow}-${req.file.originalname}`,
                 folder : "testMongo",
-                useUniqueFileName : true
+                useUniqueFileName : true,
+                tags : ["avatar", "profil"]
             })
             user.imageUrl = image.url
             user.imageId = image.fileId
