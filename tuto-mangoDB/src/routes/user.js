@@ -84,6 +84,7 @@ router.patch('/users/image/:id', async (req, res) => {
 
     if(!user) return res.status(404).send('not found')
 
+
     if(user.imageUrl) {
         imagekit.deleteFile(user.imageId, function(error, result) {
             const message = "une erreur est survenue, veuillez contacter le site."
@@ -94,6 +95,11 @@ router.patch('/users/image/:id', async (req, res) => {
     }
 
     uploadImageAndSaveToUser(req, res, async function (err) {
+        /* add JSON Data with postman key : body
+        const formData = req.body
+        const data = JSON.parse(formData.body)
+        return res.send({data})
+        */
 
         if (err) {
             return res.status(400).send({ message: err.message })
